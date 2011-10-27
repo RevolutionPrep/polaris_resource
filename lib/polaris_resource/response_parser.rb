@@ -52,7 +52,7 @@ module PolarisResource
             obj = build_object_with_attributes(attributes)
           end
         else
-          obj = @requesting_class.new(content)
+          obj = build_object_with_attributes(content)
         end
       end
     end
@@ -61,7 +61,7 @@ module PolarisResource
       if attributes.keys.include?('type')
         attributes['type'].constantize.new(attributes)
       else
-        @requesting_class.new(attributes)
+        @requesting_class.new.send(:merge_attributes, attributes)
       end
     end
 

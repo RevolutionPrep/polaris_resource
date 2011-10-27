@@ -12,7 +12,10 @@ module PolarisResource
         else
           built_object = self.class.put(*UrlBuilder.save(self.class, id, attributes_for_save))
         end
-        merge_attributes(built_object.attributes)
+        built_object.instance_variables.each do |iv|
+          self.instance_variable_set(iv, built_object.instance_variable_get(iv))
+        end
+        @valid
       end
 
       def update_attributes(new_attributes)
