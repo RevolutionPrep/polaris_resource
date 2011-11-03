@@ -71,12 +71,6 @@ module PolarisResource
         self
       end
 
-      # The stub method can be used to mock out an association without
-      # having to really load the target.
-      def stub(mock)
-        @mock = mock
-      end
-
       # This is left to be implemented by the subclasses as it will operate
       # differently in each case.
       def load_target!
@@ -90,7 +84,6 @@ module PolarisResource
       # very often, we are caching the target here, so that only a single
       # request will be made.
       def loaded_target
-        return @mock if @mock
         @target ||= load_target!
         if Array === @target && !@filters.empty?
           @filters.uniq.inject(@target.dup) do |target, filter|

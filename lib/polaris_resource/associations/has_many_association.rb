@@ -43,17 +43,14 @@ module PolarisResource
       # The association generates a relation, and then calls the very
       # same where, limit, or page method on that relation object.
       def where(query_attributes)
-        return @mock if @mock
         transform_association_into_relation.where(query_attributes)
       end
 
       def limit(amount)
-        return @mock if @mock
         transform_association_into_relation.limit(amount)
       end
 
       def page(page_number)
-        return @mock if @mock
         transform_association_into_relation.page(page_number)
       end
 
