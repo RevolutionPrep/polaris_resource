@@ -19,7 +19,11 @@ module PolarisResource
 
         # @association_class stores the class of the association, constantized
         # from the named association (i.e. Automobile, Car, CarClub)
-        @association_class = @options[:class_name].constantize
+        if @options[:class_name]
+          @association_class = @options[:class_name].constantize
+        else
+          @association_class = @association
+        end
       end
 
       def with_filter(filter)
@@ -33,7 +37,7 @@ module PolarisResource
       # like this: /meetings?course_id=1, where the 1 is the primary key.
       def load_target!
         if primary_key = @owner.send(@options[:primary_key])
-          Relation.new(@association.to_s.classify.constantize).where(@options[:foreign_key] => primary_key).limit(1).first
+          Relation.new(@association_class.to_s.classify.constantize).where(@options[:foreign_key] => primary_key).limit(1).first
         end
       end
 
