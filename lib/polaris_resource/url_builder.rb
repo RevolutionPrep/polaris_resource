@@ -14,7 +14,7 @@ module PolarisResource
       def find_all(klass)
         "/#{klass.plural_url_name}"
       end
-      
+
       def save(klass, id, parameters)
         url_base = "/#{klass.plural_url_name}"
         url_base << "/#{id}" if id
@@ -41,7 +41,7 @@ module PolarisResource
           [url_base, parameters]
         end
       end
-      
+
       def destroy(klass, id)
         "/#{klass.plural_url_name}/#{id}"
       end
