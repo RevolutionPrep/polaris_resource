@@ -6,7 +6,7 @@ module PolarisResource
 
       def save
         attributes_for_save = { self.class.to_s.underscore => attributes_without_basic_attributes.reject { |k,v| v.nil? } }
-        
+
         if new_record?
           built_object = self.class.post(*UrlBuilder.save(self.class, nil, attributes_for_save))
         else
@@ -22,7 +22,7 @@ module PolarisResource
         merge_attributes(new_attributes)
         save
       end
-      
+
       def destroy
         self.class.delete(UrlBuilder.destroy(self.class, id))
       end
