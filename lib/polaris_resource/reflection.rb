@@ -11,7 +11,7 @@ module PolarisResource
     end
 
     def class_name
-      name.to_s.singularize.camelize
+      (options[:class_name] || name).to_s.singularize.camelize
     end
 
     def build_association(*options)

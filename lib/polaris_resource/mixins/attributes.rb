@@ -22,7 +22,7 @@ module PolarisResource
       def attribute_defined?(attribute)
         default_attributes.keys.include?(attribute.to_s)
       end
-      
+
       def define_attribute_accessor(method)
         method = method.to_s.delete('=')
         define_method("#{method}=") do |value|
@@ -33,7 +33,7 @@ module PolarisResource
         define_method(method) do
           attributes[method]
         end
-        
+
         define_attribute_methods [method]
       end
       private :define_attribute_accessor
@@ -72,7 +72,7 @@ module PolarisResource
           attributes[attribute.to_sym] = typecast(attribute, value)
         end
       end
-      
+
       def update_reflection(reflection, attribute, value)
         return unless value
         if reflection.macro == :has_many # need to construct each member of array one-by-one
