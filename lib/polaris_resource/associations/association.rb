@@ -31,7 +31,7 @@ module PolarisResource
         @target = settings[:target]
 
         @filters = settings[:filters] || []
-        
+
         @includes = []
 
         # @options holds the chosen options for the association. Several of these
