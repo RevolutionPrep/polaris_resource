@@ -4,8 +4,12 @@ module PolarisResource
 
     module InstanceMethods
 
-      def save
+      def save(with_validations = true)
         attributes_for_save = { self.class.attributes_root => attributes_without_basic_attributes.reject { |k,v| v.nil? } }
+
+        if with_validations
+          return false unless valid?
+        end
 
         if new_record?
           built_object = self.class.post(*UrlBuilder.save(self.class, nil, attributes_for_save))
